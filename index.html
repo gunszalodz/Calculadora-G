@@ -257,8 +257,8 @@
 
     .table-cell-label {
       flex: 1;
-      padding: 6px 10px;
-      font-size: 0.95rem;
+      padding: 8px 10px;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--muted);
     }
@@ -266,22 +266,34 @@
     .table-cell-label.blue { color: var(--blue); }
 
     .table-cell-input {
-      width: 130px;
-      padding: 4px;
+      width: 170px;
+      padding: 5px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 4px;
+      gap: 6px;
     }
 
-    .table-cell-input input, .table-cell-input select {
+    .table-cell-input input {
       width: 100%;
-      padding: 5px 8px;
+      padding: 6px 8px;
       background-color: var(--bg);
       border: 1px solid var(--field-border);
       border-radius: 6px;
       color: var(--title);
-      font-size: 1.2rem;
+      font-size: 1.15rem;
+      font-weight: bold;
+      text-align: center;
+      outline: none;
+    }
+
+    .table-cell-input select {
+      padding: 6px 4px;
+      background-color: var(--bg);
+      border: 1px solid var(--field-border);
+      border-radius: 6px;
+      color: var(--title);
+      font-size: 0.85rem;
       font-weight: bold;
       text-align: center;
       outline: none;
@@ -305,7 +317,7 @@
       background: var(--btn2-bg);
       border: 1px solid var(--btn2-border);
       color: var(--accent);
-      padding: 3px 12px;
+      padding: 4px 14px;
       border-radius: 6px;
       font-size: 0.85rem;
       font-weight: 700;
@@ -320,7 +332,7 @@
       background: var(--bg);
       border: 1px solid var(--field-border);
       border-radius: 8px;
-      padding: 8px 12px;
+      padding: 10px 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -328,16 +340,16 @@
     .result-box-compact .text {
       color: var(--green);
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
     }
 
     .btn-copy {
       background: var(--btn2-bg);
       border: 1px solid var(--btn2-border);
       color: var(--title);
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 6px;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
     }
@@ -359,19 +371,9 @@
     .virtual-keypad {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 5px;
+      gap: 6px;
       flex: 1;
       margin-top: 4px;
-    }
-
-    /* Teclado más compacto específicamente para la solapa de escalas */
-    #tab-scale .virtual-keypad {
-      gap: 3px;
-      max-height: 190px;
-    }
-    #tab-scale .v-key {
-      padding: 4px 0 !important;
-      font-size: 1.25rem !important;
     }
 
     .v-key {
@@ -385,7 +387,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px 0;
+      padding: 10px 0;
     }
 
     .v-key:active {
@@ -905,24 +907,24 @@
       </div>
 
       <div class="result-box-compact">
-        <div class="text" id="scale-result-text" style="font-size: 0.95rem;">Escala = 0 cm</div>
+        <div class="text" id="scale-result-text">Escala = 0 cm</div>
         <button class="btn-copy" onclick="copyText('scale-result-text')">Copiar</button>
       </div>
 
       <div class="calc-table-layout">
         <div class="table-row">
-          <div class="table-cell-label" style="font-size: 0.8rem; color: var(--title);">Escala (ej: 1:2)</div>
-          <div class="table-cell-input" style="gap: 4px; width: 130px;">
-            <input type="text" inputmode="none" id="scale-r1" value="1" onclick="setActiveInput(this)" readonly style="font-size:1rem; padding:3px;">
+          <div class="table-cell-label" style="color: var(--title);">Escala (ej: 1:2)</div>
+          <div class="table-cell-input">
+            <input type="text" inputmode="none" id="scale-r1" value="1" onclick="setActiveInput(this)" readonly>
             <span style="color: var(--accent); font-weight: bold;">:</span>
-            <input type="text" inputmode="none" id="scale-r2" value="2" onclick="setActiveInput(this)" readonly style="font-size:1rem; padding:3px;">
+            <input type="text" inputmode="none" id="scale-r2" value="2" onclick="setActiveInput(this)" readonly>
           </div>
         </div>
         <div class="table-row">
-          <div class="table-cell-label green" style="font-size: 0.8rem;">Longitud real</div>
-          <div class="table-cell-input" style="width: 155px; gap: 3px;">
-            <input type="text" inputmode="none" id="scale-real" placeholder="0" oninput="calcScale('real')" onclick="setActiveInput(this)" readonly style="font-size: 1rem; padding: 3px;">
-            <select id="scale-unit-real" onchange="calcScale('real')" style="width: 62px; font-size: 0.75rem; padding: 3px; background: var(--bg); color: var(--title); border: 1px solid var(--field-border); border-radius: 4px;">
+          <div class="table-cell-label green">Longitud real</div>
+          <div class="table-cell-input">
+            <input type="text" inputmode="none" id="scale-real" placeholder="0" oninput="calcScale('real')" onclick="setActiveInput(this)" readonly>
+            <select id="scale-unit-real" onchange="calcScale('real')">
               <option value="milímetro">mm</option>
               <option value="centímetro" selected>cm</option>
               <option value="metro">m</option>
@@ -930,10 +932,10 @@
           </div>
         </div>
         <div class="table-row">
-          <div class="table-cell-label blue" style="font-size: 0.8rem;">Longitud de escala</div>
-          <div class="table-cell-input" style="width: 155px; gap: 3px;">
-            <input type="text" inputmode="none" id="scale-plan" placeholder="0" oninput="calcScale('plan')" onclick="setActiveInput(this)" readonly style="font-size: 1rem; padding: 3px;">
-            <select id="scale-unit-plan" onchange="calcScale('plan')" style="width: 62px; font-size: 0.75rem; padding: 3px; background: var(--bg); color: var(--title); border: 1px solid var(--field-border); border-radius: 4px;">
+          <div class="table-cell-label blue">Longitud de escala</div>
+          <div class="table-cell-input">
+            <input type="text" inputmode="none" id="scale-plan" placeholder="0" oninput="calcScale('plan')" onclick="setActiveInput(this)" readonly>
+            <select id="scale-unit-plan" onchange="calcScale('plan')">
               <option value="milímetro">mm</option>
               <option value="centímetro" selected>cm</option>
               <option value="metro">m</option>
@@ -942,11 +944,11 @@
         </div>
       </div>
 
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2px;">
-        <div class="log-box-compact" id="scale-log" style="flex: 1; border: none; background: transparent; padding: 0; font-size: 0.7rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; min-height: 28px;">
+        <div class="log-box-compact" id="scale-log" style="flex: 1; border: none; background: transparent; padding: 0;">
           • Ingrese valores.
         </div>
-        <button class="btn-ce" onclick="clearScale()" style="padding: 2px 8px; font-size: 0.75rem;">CE</button>
+        <button class="btn-ce" onclick="clearScale()">CE</button>
       </div>
 
       <div class="virtual-keypad">
@@ -962,7 +964,7 @@
         <button class="v-key" onclick="vKey('2')">2</button>
         <button class="v-key" onclick="vKey('3')">3</button>
         <button class="v-key op" onclick="vKey(',')">,</button>
-        <button class="v-key" style="grid-column: span 4; padding: 3px 0 !important;" onclick="vKey('0')">0</button>
+        <button class="v-key" style="grid-column: span 4;" onclick="vKey('0')">0</button>
       </div>
     </div>
   </main>
