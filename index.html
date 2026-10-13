@@ -355,7 +355,7 @@
       overflow-y: auto;
     }
 
-    /* TECLADO VIRTUAL INTEGRADO (Modificado tamaño y peso de fuente) */
+    /* TECLADO VIRTUAL INTEGRADO */
     .virtual-keypad {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -364,13 +364,23 @@
       margin-top: 4px;
     }
 
+    /* Teclado más compacto específicamente para la solapa de escalas */
+    #tab-scale .virtual-keypad {
+      gap: 3px;
+      max-height: 190px;
+    }
+    #tab-scale .v-key {
+      padding: 4px 0 !important;
+      font-size: 1.25rem !important;
+    }
+
     .v-key {
       background-color: var(--bg);
       border: 1px solid var(--calc-border);
       border-radius: 6px;
       color: var(--title);
-      font-size: 1.45rem; /* Tamaño aumentado */
-      font-weight: 800;   /* Negrita reforzada */
+      font-size: 1.45rem;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -895,38 +905,48 @@
       </div>
 
       <div class="result-box-compact">
-        <div class="text" id="scale-result-text" style="font-size: 1rem;">Escala = 0 cm</div>
+        <div class="text" id="scale-result-text" style="font-size: 0.95rem;">Escala = 0 cm</div>
         <button class="btn-copy" onclick="copyText('scale-result-text')">Copiar</button>
       </div>
 
       <div class="calc-table-layout">
         <div class="table-row">
-          <div class="table-cell-label" style="font-size: 0.85rem; color: var(--title);">Escala (ej: 1:2)</div>
-          <div class="table-cell-input" style="gap: 4px; width: 140px;">
-            <input type="text" inputmode="none" id="scale-r1" value="1" onclick="setActiveInput(this)" readonly>
+          <div class="table-cell-label" style="font-size: 0.8rem; color: var(--title);">Escala (ej: 1:2)</div>
+          <div class="table-cell-input" style="gap: 4px; width: 130px;">
+            <input type="text" inputmode="none" id="scale-r1" value="1" onclick="setActiveInput(this)" readonly style="font-size:1rem; padding:3px;">
             <span style="color: var(--accent); font-weight: bold;">:</span>
-            <input type="text" inputmode="none" id="scale-r2" value="2" onclick="setActiveInput(this)" readonly>
+            <input type="text" inputmode="none" id="scale-r2" value="2" onclick="setActiveInput(this)" readonly style="font-size:1rem; padding:3px;">
           </div>
         </div>
         <div class="table-row">
-          <div class="table-cell-label green" style="font-size: 0.85rem;">Longitud real</div>
-          <div class="table-cell-input" style="width: 140px;">
-            <input type="text" inputmode="none" id="scale-real" placeholder="0" oninput="calcScale('real')" onclick="setActiveInput(this)" readonly>
+          <div class="table-cell-label green" style="font-size: 0.8rem;">Longitud real</div>
+          <div class="table-cell-input" style="width: 155px; gap: 3px;">
+            <input type="text" inputmode="none" id="scale-real" placeholder="0" oninput="calcScale('real')" onclick="setActiveInput(this)" readonly style="font-size: 1rem; padding: 3px;">
+            <select id="scale-unit-real" onchange="calcScale('real')" style="width: 62px; font-size: 0.75rem; padding: 3px; background: var(--bg); color: var(--title); border: 1px solid var(--field-border); border-radius: 4px;">
+              <option value="milímetro">mm</option>
+              <option value="centímetro" selected>cm</option>
+              <option value="metro">m</option>
+            </select>
           </div>
         </div>
         <div class="table-row">
-          <div class="table-cell-label blue" style="font-size: 0.85rem;">Longitud de escala</div>
-          <div class="table-cell-input" style="width: 140px;">
-            <input type="text" inputmode="none" id="scale-plan" placeholder="0" oninput="calcScale('plan')" onclick="setActiveInput(this)" readonly>
+          <div class="table-cell-label blue" style="font-size: 0.8rem;">Longitud de escala</div>
+          <div class="table-cell-input" style="width: 155px; gap: 3px;">
+            <input type="text" inputmode="none" id="scale-plan" placeholder="0" oninput="calcScale('plan')" onclick="setActiveInput(this)" readonly style="font-size: 1rem; padding: 3px;">
+            <select id="scale-unit-plan" onchange="calcScale('plan')" style="width: 62px; font-size: 0.75rem; padding: 3px; background: var(--bg); color: var(--title); border: 1px solid var(--field-border); border-radius: 4px;">
+              <option value="milímetro">mm</option>
+              <option value="centímetro" selected>cm</option>
+              <option value="metro">m</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div class="log-box-compact" id="scale-log" style="flex: 1; border: none; background: transparent; padding: 0;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2px;">
+        <div class="log-box-compact" id="scale-log" style="flex: 1; border: none; background: transparent; padding: 0; font-size: 0.7rem;">
           • Ingrese valores.
         </div>
-        <button class="btn-ce" onclick="clearScale()">CE</button>
+        <button class="btn-ce" onclick="clearScale()" style="padding: 2px 8px; font-size: 0.75rem;">CE</button>
       </div>
 
       <div class="virtual-keypad">
@@ -942,7 +962,7 @@
         <button class="v-key" onclick="vKey('2')">2</button>
         <button class="v-key" onclick="vKey('3')">3</button>
         <button class="v-key op" onclick="vKey(',')">,</button>
-        <button class="v-key" style="grid-column: span 4;" onclick="vKey('0')">0</button>
+        <button class="v-key" style="grid-column: span 4; padding: 3px 0 !important;" onclick="vKey('0')">0</button>
       </div>
     </div>
   </main>
@@ -1403,6 +1423,10 @@
     }
 
     /* ESCALAS */
+    const UNIT_ABBR = { 'milímetro': 'mm', 'centímetro': 'cm', 'metro': 'm' };
+    const UNIT_TO_M = { 'milímetro': 0.001, 'centímetro': 0.01, 'metro': 1 };
+    let scaleMode = 'real';
+
     function calcScale(mode) {
       if (mode) scaleMode = mode; else mode = scaleMode;
       const r1 = parseNum(document.getElementById('scale-r1').value) || 1;
@@ -1411,33 +1435,42 @@
 
       const realInput = document.getElementById('scale-real');
       const planInput = document.getElementById('scale-plan');
+      const uReal = document.getElementById('scale-unit-real').value;
+      const uPlan = document.getElementById('scale-unit-plan').value;
+      const fReal = UNIT_TO_M[uReal] || 0.01;
+      const fPlan = UNIT_TO_M[uPlan] || 0.01;
+
       const realValStr = realInput.value.trim();
       const planValStr = planInput.value.trim();
 
       if (mode === 'real') {
         if (realValStr === '') {
           planInput.value = '';
-          document.getElementById('scale-result-text').innerText = `Escala = 0 cm`;
+          document.getElementById('scale-result-text').innerText = `Escala = 0 ${UNIT_ABBR[uPlan]}`;
           document.getElementById('scale-log').innerHTML = '• Ingrese valores.';
           return;
         }
         const realVal = parseNum(realValStr);
-        const planVal = realVal / ratio;
+        const realMeters = realVal * fReal;
+        const planMeters = realMeters / ratio;
+        const planVal = planMeters / fPlan;
         planInput.value = roundNum(planVal);
-        document.getElementById('scale-result-text').innerText = `Escala = ${formatEs(planVal, 4)} cm`;
-        document.getElementById('scale-log').innerHTML = `• Escala ${r1}:${r2} | Real: ${formatEs(realVal, 4)} cm`;
+        document.getElementById('scale-result-text').innerText = `Escala = ${formatEs(planVal, 4)} ${UNIT_ABBR[uPlan]}`;
+        document.getElementById('scale-log').innerHTML = `• ${r1}:${r2} | Real: ${formatEs(realVal, 4)} ${UNIT_ABBR[uReal]}`;
       } else {
         if (planValStr === '') {
           realInput.value = '';
-          document.getElementById('scale-result-text').innerText = `Escala = 0 cm`;
+          document.getElementById('scale-result-text').innerText = `Escala = 0 ${UNIT_ABBR[uPlan]}`;
           document.getElementById('scale-log').innerHTML = '• Ingrese valores.';
           return;
         }
         const planVal = parseNum(planValStr);
-        const realVal = planVal * ratio;
+        const planMeters = planVal * fPlan;
+        const realMeters = planMeters * ratio;
+        const realVal = realMeters / fReal;
         realInput.value = roundNum(realVal);
-        document.getElementById('scale-result-text').innerText = `Escala = ${formatEs(planVal, 4)} cm`;
-        document.getElementById('scale-log').innerHTML = `• Escala ${r1}:${r2} | Real: ${formatEs(realVal, 4)} cm`;
+        document.getElementById('scale-result-text').innerText = `Escala = ${formatEs(planVal, 4)} ${UNIT_ABBR[uPlan]}`;
+        document.getElementById('scale-log').innerHTML = `• ${r1}:${r2} | Real: ${formatEs(realVal, 4)} ${UNIT_ABBR[uReal]}`;
       }
     }
 
