@@ -11,131 +11,65 @@
   <meta name="apple-mobile-web-app-title" content="Calculadora">
   <link rel="apple-touch-icon" href="icon.png">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    /* VARIABLES CSS - TEMA PREDETERMINADO (Original) */
+    /* ===== TEMA ORIGINAL ===== */
     :root {
-      --bg:#0b0e14; --header-bg:#0b0e14; --body-bg:#0b0e14; --text:#e6edf3;
-      --accent:#ff9800; --accent-hover:#e68a00; --on-accent:#000000; --title:#ffffff;
-      --panel:#121721; --panel-border:#1e2638; --icon-bg:#382b14; --muted:#8b949e;
-      --green:#3fb950; --blue:#58a6ff; --field:#06090e; --field-border:#1f293d; --focus:#388bfd;
-      --btn2-bg:#1c212e; --btn2-border:#2d3548; --calc-hover:#161c28; --calc-border:#1d2433;
-      --nav-bg:#06080c; --nav-border:#161b26; --nav-active-bg:#231b0c; --nav-active-border:#3d2d10;
-      --panel-glow:none; --btn-glow:none;
-      --btn-equals-border: none;
+      --font-ui: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+      --font-num: "IBM Plex Mono", ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+
+      --bg: #0b0e14; --header-bg: #0b0e14; --body-bg: #0b0e14; --text: #e6edf3;
+      --accent: #ff9800; --accent-hover: #e68a00; --accent-edge: #8f5400; --on-accent: #000000;
+      --title: #ffffff;
+      --green: #3fb950; --blue: #58a6ff;
+      --panel: #121721; --panel-border: #1e2638; --muted: #8b949e;
+      --field: #06090e; --field-border: #1f293d; --focus: #388bfd;
+      --btn2-bg: #1c212e; --btn2-border: #2d3548; --calc-hover: #1f2735; --calc-border: #1d2433;
+      --nav-bg: #06080c; --nav-border: #161b26;
+      --key-bg: #171d29; --key-alt: #111620; --key-edge: #04060a; --key-hi: rgba(255,255,255,.07);
+      --lcd-bg: #120d06; --lcd-fg: #ffab1a; --lcd-dim: #8c6420; --inset: rgba(0,0,0,.55);
     }
 
-    /* VARIABLES CSS - TEMA ROSA */
+    /* ===== TEMA ROSA ===== */
     :root[data-theme="pink"] {
-      --bg:#050407; --header-bg:transparent;
-      --body-bg:linear-gradient(160deg, rgba(255,25,150,.38) 0%, rgba(5,4,7,0) 30%, rgba(5,4,7,0) 68%, rgba(255,25,150,.30) 100%), #050407;
-      --text:#f6e8f1; --accent:#ff2fa3; --accent-hover:#e01f8e; --on-accent:#0a0006; --title:#ffffff;
-      --panel:rgba(12,5,12,.86); --panel-border:#6b1f52; --icon-bg:#3a0f2b; --muted:#e3b6d3;
-      --green:#ff7ac8; --blue:#d2a8ff; --field:#08040a; --field-border:#6b1f52; --focus:#ff2fa3;
-      --btn2-bg:#26101f; --btn2-border:#7a2560; --calc-hover:#2e1025; --calc-border:#5a1a45;
-      --nav-bg:rgba(5,3,6,.92); --nav-border:#4a1538; --nav-active-bg:#34102a; --nav-active-border:#ff2fa3;
-      --panel-glow:0 0 0 1px rgba(255,47,163,.15), 0 0 24px rgba(255,47,163,.14);
-      --btn-glow:0 0 14px rgba(255,47,163,.45);
-      --btn-equals-border: none;
+      --bg: #050407; --header-bg: transparent;
+      --body-bg: linear-gradient(160deg, rgba(255,25,150,.38) 0%, rgba(5,4,7,0) 30%, rgba(5,4,7,0) 68%, rgba(255,25,150,.30) 100%), #050407;
+      --text: #f6e8f1; --accent: #ff2fa3; --accent-hover: #e01f8e; --accent-edge: #8f1058; --on-accent: #0a0006;
+      --title: #ffffff;
+      --green: #ff7ac8; --blue: #d2a8ff;
+      --panel: rgba(12,5,12,.86); --panel-border: #6b1f52; --muted: #e3b6d3;
+      --field: #08040a; --field-border: #6b1f52; --focus: #ff2fa3;
+      --btn2-bg: #26101f; --btn2-border: #7a2560; --calc-hover: #3a1530; --calc-border: #5a1a45;
+      --nav-bg: rgba(5,3,6,.92); --nav-border: #4a1538;
+      --key-bg: #25101e; --key-alt: #1a0b15; --key-edge: #07020a; --key-hi: rgba(255,140,210,.12);
+      --lcd-bg: #12050d; --lcd-fg: #ff7ac8; --lcd-dim: #9a4d7e; --inset: rgba(0,0,0,.6);
     }
 
-    /* VARIABLES CSS - TEMA CAFÉ */
+    /* ===== TEMA CAFÉ ===== */
     :root[data-theme="Café"] {
-      --bg:#f2eada;
-      --header-bg:#f2eada;
-      --body-bg:#f2eada;
-      --text:#2c2b28;
-      --accent:#7a5230;
-      --accent-hover:#5e3d21;
-      --on-accent:#ffffff;
-      --title:#2c2b28;
-      --panel:#e8decb;
-      --panel-border:#cbb898;
-      --icon-bg:#dbcaaa;
-      --muted:#2c2b28;
-      --green:#5a3e2b;
-      --blue:#8c5222;
-      --field:#faf6ee;
-      --field-border:#cbb898;
-      --focus:#7a5230;
-      --btn2-bg:#dfd2b9;
-      --btn2-border:#c1ad8b;
-      --calc-hover:#dbcca9;
-      --calc-border:#cbb898;
-      --nav-bg:#e8decb;
-      --nav-border:#cbb898;
-      --nav-active-bg:#dbcaaa;
-      --nav-active-border:#7a5230;
-      --panel-glow:none;
-      --btn-glow:none;
-      --btn-equals-border: 1px solid #5e3d21;
+      --bg: #f2eada; --header-bg: #f2eada; --body-bg: #f2eada; --text: #2c2b28;
+      --accent: #7a5230; --accent-hover: #5e3d21; --accent-edge: #3f2812; --on-accent: #ffffff;
+      --title: #2c2b28;
+      --green: #4f6a2a; --blue: #9a4a1c;
+      --panel: #e8decb; --panel-border: #cbb898; --muted: #2c2b28;
+      --field: #faf6ee; --field-border: #cbb898; --focus: #7a5230;
+      --btn2-bg: #dfd2b9; --btn2-border: #c1ad8b; --calc-hover: #e9dfc8; --calc-border: #cbb898;
+      --nav-bg: #e8decb; --nav-border: #cbb898;
+      --key-bg: #f7f0e0; --key-alt: #efe5cf; --key-edge: #a88f67; --key-hi: rgba(255,255,255,.85);
+      --lcd-bg: #c9cea8; --lcd-fg: #2a321c; --lcd-dim: #67704a; --inset: rgba(60,50,20,.35);
     }
-
-    .tab-panel { box-shadow: var(--panel-glow); }
-    .btn-clear { box-shadow: var(--btn-glow); }
-
-    .header-actions { margin-left: auto; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-
-    .icon-btn {
-      width: 28px;
-      height: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--btn2-bg);
-      border: 1px solid var(--btn2-border);
-      border-radius: 6px;
-      color: var(--title);
-      cursor: pointer;
-      padding: 0;
-      transition: background 0.15s, color 0.15s;
-      touch-action: manipulation;
-    }
-
-    .icon-btn svg {
-      width: 15px;
-      height: 15px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .icon-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: var(--on-accent);
-    }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 70px;
-      transform: translateX(-50%);
-      background: var(--btn2-bg);
-      border: 1px solid var(--accent);
-      color: var(--title);
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      max-width: 90%;
-      text-align: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      z-index: 10;
-    }
-
-    .toast.show { opacity: 1; }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--font-ui);
       user-select: none;
       touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -150,16 +84,14 @@
 
     main::-webkit-scrollbar,
     .tab-panel::-webkit-scrollbar,
-    body::-webkit-scrollbar {
-      display: none;
-    }
+    body::-webkit-scrollbar { display: none; }
 
     main, .tab-panel, body {
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
 
-    /* Header */
+    /* ===== Encabezado ===== */
     header {
       padding: 10px 16px;
       display: flex;
@@ -169,29 +101,68 @@
       flex-shrink: 0;
     }
 
-    .app-icon {
-      width: 26px;
-      height: 26px;
-      background: var(--accent);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: var(--on-accent);
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
     header h1 {
       font-size: 1rem;
       font-weight: 700;
+      letter-spacing: .02em;
       color: var(--title);
       min-width: 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
+    .header-actions { margin-left: auto; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+    .icon-btn {
+      width: 28px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--btn2-bg);
+      border: 1px solid var(--btn2-border);
+      border-radius: 3px;
+      box-shadow: 0 1px 0 var(--key-edge);
+      color: var(--title);
+      cursor: pointer;
+      padding: 0;
+      touch-action: manipulation;
+    }
+
+    .icon-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-btn:active { transform: translateY(1px); box-shadow: none; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 70px;
+      transform: translateX(-50%);
+      background: var(--btn2-bg);
+      border: 1px solid var(--accent);
+      color: var(--title);
+      padding: 9px 14px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      max-width: 90%;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 10;
+    }
+
+    .toast.show { opacity: 1; }
 
     main {
       flex: 1;
@@ -206,19 +177,17 @@
       height: 100%;
       flex-direction: column;
       background: var(--panel);
-      border-radius: 12px;
+      border-radius: 6px;
       border: 1px solid var(--panel-border);
       padding: 10px;
       justify-content: flex-start;
       gap: 8px;
     }
 
-    .tab-panel.active {
-      display: flex;
-    }
+    .tab-panel.active { display: flex; }
 
     .panel-title {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--title);
       display: flex;
@@ -227,24 +196,12 @@
       flex-shrink: 0;
     }
 
-    .panel-icon-box {
-      background: var(--icon-bg);
-      color: var(--accent);
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-    }
-
-    /* ESTILO TIPO TABLA COMPACTA */
+    /* ===== Tabla de campos ===== */
     .calc-table-layout {
       display: flex;
       flex-direction: column;
       border: 1px solid var(--field-border);
-      border-radius: 8px;
+      border-radius: 4px;
       overflow: hidden;
       background: var(--field);
     }
@@ -254,9 +211,7 @@
       align-items: center;
       border-bottom: 1px solid var(--field-border);
     }
-    .table-row:last-child {
-      border-bottom: none;
-    }
+    .table-row:last-child { border-bottom: none; }
 
     .table-cell-label {
       flex: 1;
@@ -277,16 +232,20 @@
       gap: 4px;
     }
 
+    .table-cell-input span { font-family: var(--font-num); font-weight: 700; }
+
     .table-cell-input input {
       flex: 1;
       min-width: 0;
       padding: 8px 6px;
       background-color: var(--bg);
       border: 1px solid var(--field-border);
-      border-radius: 6px;
+      border-radius: 3px;
+      box-shadow: inset 0 1px 3px var(--inset);
       color: var(--title);
+      font-family: var(--font-num);
       font-size: 1.25rem;
-      font-weight: bold;
+      font-weight: 700;
       text-align: center;
       outline: none;
       touch-action: manipulation;
@@ -298,10 +257,11 @@
       padding: 8px 2px;
       background-color: var(--bg);
       border: 1px solid var(--field-border);
-      border-radius: 6px;
+      border-radius: 3px;
       color: var(--title);
-      font-size: 0.85rem;
-      font-weight: bold;
+      font-family: var(--font-num);
+      font-size: 0.8rem;
+      font-weight: 700;
       text-align: center;
       outline: none;
       touch-action: manipulation;
@@ -309,75 +269,100 @@
 
     .table-cell-input input.active-input {
       border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent);
+      box-shadow: inset 0 1px 3px var(--inset), 0 0 0 1px var(--accent);
     }
 
     .table-cell-input input:focus, .table-cell-input select:focus {
       border-color: var(--focus);
     }
 
-    /* Botón CE compacto */
-    .btn-ce-box {
-      display: flex;
-      justify-content: flex-end;
-    }
-    .btn-ce {
+    /* ===== Botones secundarios ===== */
+    .btn-ce-box { display: flex; justify-content: flex-end; }
+
+    .btn-ce, .btn-copy {
       background: var(--btn2-bg);
       border: 1px solid var(--btn2-border);
-      color: var(--accent);
-      padding: 5px 14px;
-      border-radius: 6px;
-      font-size: 0.85rem;
+      box-shadow: 0 1px 0 var(--key-edge);
+      border-radius: 3px;
       font-weight: 700;
       cursor: pointer;
       touch-action: manipulation;
     }
-    .btn-ce:hover {
-      background: var(--calc-hover);
+
+    .btn-ce { color: var(--accent); padding: 5px 14px; font-size: 0.85rem; }
+    .btn-copy { color: var(--title); padding: 6px 12px; font-size: 0.8rem; font-weight: 600; }
+
+    .btn-ce:active, .btn-copy:active { transform: translateY(1px); box-shadow: none; }
+
+    @media (hover: hover) {
+      .btn-ce:hover, .btn-copy:hover { background: var(--calc-hover); }
     }
 
-    /* Resultado integrado y visible */
+    /* ===== Pantalla de resultado (LCD) ===== */
     .result-box-compact {
-      background: var(--bg);
+      background: var(--lcd-bg);
       border: 1px solid var(--field-border);
-      border-radius: 8px;
+      border-radius: 3px;
+      box-shadow: inset 0 2px 5px var(--inset);
       padding: 12px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 8px;
     }
     .result-box-compact .text {
-      color: var(--green);
+      color: var(--lcd-fg);
+      font-family: var(--font-num);
       font-weight: 700;
-      font-size: 1.15rem;
-    }
-
-    .btn-copy {
-      background: var(--btn2-bg);
-      border: 1px solid var(--btn2-border);
-      color: var(--title);
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      touch-action: manipulation;
+      font-size: 1.1rem;
     }
 
     .log-box-compact {
       background: var(--bg);
       border: 1px solid var(--field-border);
-      border-radius: 8px;
+      border-radius: 3px;
       padding: 6px 10px;
-      font-family: monospace;
+      font-family: var(--font-num);
       font-size: 0.75rem;
-      color: var(--green);
+      font-weight: 500;
+      color: var(--muted);
       line-height: 1.2;
       max-height: 38px;
       overflow-y: auto;
     }
 
-    /* TECLADO VIRTUAL AUXILIAR OPTIMIZADO (Más compacto y con el 0 normalizado) */
+    /* ===== Teclas ===== */
+    .v-key, .calc-btn {
+      background-color: var(--key-bg);
+      border: 1px solid var(--key-edge);
+      border-radius: 4px;
+      box-shadow: inset 0 1px 0 var(--key-hi), 0 2px 0 var(--key-edge);
+      color: var(--title);
+      font-family: var(--font-num);
+      font-size: 1.2rem;
+      font-weight: 700;
+      -webkit-text-stroke: 0.5px currentColor;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+      transition: transform .05s;
+    }
+
+    .v-key { padding: 6px 0; }
+
+    .v-key:active, .calc-btn:active {
+      transform: translateY(2px);
+      box-shadow: inset 0 1px 0 var(--key-hi), 0 0 0 var(--key-edge);
+    }
+
+    @media (hover: hover) {
+      .v-key:hover, .calc-btn:hover { background-color: var(--calc-hover); }
+    }
+
+    .v-key.op, .calc-btn.op { color: var(--accent); font-weight: 800; }
+
     .virtual-keypad {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -386,35 +371,12 @@
       margin-top: 4px;
     }
 
-    .v-key {
-      background-color: var(--bg);
-      border: 1px solid var(--calc-border);
-      border-radius: 6px;
-      color: var(--title);
-      font-size: 1.2rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 0;
-      touch-action: manipulation;
-    }
-
-    .v-key:active {
-      background-color: var(--calc-hover);
-    }
-
-    .v-key.op {
-      color: var(--accent);
-      font-weight: 800;
-    }
-
-    /* --- CALCULADORA ESTÁNDAR --- */
+    /* ===== Calculadora estándar / científica ===== */
     .calc-display {
-      background: var(--field);
+      background: var(--lcd-bg);
       border: 1px solid var(--field-border);
-      border-radius: 8px;
+      border-radius: 3px;
+      box-shadow: inset 0 2px 5px var(--inset);
       padding: 10px 14px;
       text-align: right;
       margin-bottom: 10px;
@@ -425,17 +387,20 @@
     }
 
     .calc-history {
-      font-size: 0.85rem;
-      color: var(--muted);
+      font-family: var(--font-num);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--lcd-dim);
       min-height: 18px;
       white-space: nowrap;
       overflow: hidden;
     }
 
     .calc-main-value {
-      font-size: 2.3rem;
+      font-family: var(--font-num);
+      font-size: 2.2rem;
       font-weight: 700;
-      color: var(--title);
+      color: var(--lcd-fg);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -448,93 +413,24 @@
       flex: 1;
     }
 
-    .calc-btn {
-      background-color: var(--bg);
-      border: 1px solid var(--calc-border);
-      border-radius: 8px;
-      color: var(--title);
-      font-size: 1.4rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s;
-      touch-action: manipulation;
-    }
-
-    .calc-btn:hover {
-      background-color: var(--calc-hover);
-    }
-
-    .calc-btn.op {
-      color: var(--accent);
-      font-size: 1.4rem;
-      font-weight: 800;
-    }
+    .calc-btn { font-size: 1.4rem; }
 
     .calc-btn.equals {
       background-color: var(--accent);
       color: var(--on-accent);
       font-size: 1.6rem;
-      border: var(--btn-equals-border);
+      font-weight: 800;
+      border-color: var(--accent-edge);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 2px 0 var(--accent-edge);
     }
 
-    .calc-btn.equals:hover {
-      background-color: var(--accent-hover);
+    .calc-btn.equals:active {
+      transform: translateY(2px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 0 0 var(--accent-edge);
     }
 
-    /* Navegación Inferior */
-    nav {
-      background-color: var(--nav-bg);
-      border-top: 1px solid var(--nav-border);
-      display: flex;
-      justify-content: space-around;
-      padding: 4px;
-      flex-shrink: 0;
-    }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      padding: 6px;
-      border-radius: 6px;
-      width: 16%;
-      touch-action: manipulation;
-    }
-
-    .nav-item.active {
-      color: var(--accent);
-      background-color: var(--nav-active-bg);
-      border: 1px solid var(--nav-active-border);
-    }
-
-    .nav-icon {
-      width: 20px;
-      height: 20px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2.2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .panel-icon-box svg {
-      width: 16px;
-      height: 16px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    @media (hover: hover) {
+      .calc-btn.equals:hover { background-color: var(--accent-hover); }
     }
 
     #calc-title { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -546,7 +442,7 @@
       padding: 2px;
       background: var(--field);
       border: 1px solid var(--field-border);
-      border-radius: 8px;
+      border-radius: 4px;
       flex-shrink: 0;
     }
 
@@ -557,7 +453,7 @@
       font-size: 0.78rem;
       font-weight: 700;
       padding: 5px 10px;
-      border-radius: 6px;
+      border-radius: 3px;
       cursor: pointer;
       touch-action: manipulation;
     }
@@ -567,11 +463,7 @@
       color: var(--on-accent);
     }
 
-    .calc-body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+    .calc-body { flex: 1; display: flex; flex-direction: column; }
 
     .sci-grid {
       display: none;
@@ -583,11 +475,13 @@
     .tab-panel.sci .sci-grid { display: grid; }
 
     .calc-btn.sci {
+      background-color: var(--key-alt);
       font-size: 0.85rem;
-      color: var(--blue);
+      color: var(--text);
+      -webkit-text-stroke: 0.3px currentColor;
     }
 
-    .calc-btn.sci.angle { color: var(--accent); }
+    .calc-btn.sci.angle { color: var(--accent); font-weight: 800; }
     .calc-btn sup { font-size: 0.6em; }
 
     #tab-standard.sci .calc-display {
@@ -604,10 +498,7 @@
 
     #tab-standard.sci { min-height: 0 !important; }
 
-    #tab-standard.sci .calc-body {
-      flex: 1 !important;
-      min-height: 0;
-    }
+    #tab-standard.sci .calc-body { flex: 1 !important; min-height: 0; }
 
     #tab-standard.sci .sci-grid {
       gap: 4px !important;
@@ -630,8 +521,49 @@
       font-size: 1rem !important;
     }
 
-    #tab-standard.sci .calc-btn.sci {
-      font-size: 0.75rem !important;
+    #tab-standard.sci .calc-btn.sci { font-size: 0.75rem !important; }
+
+    /* ===== Navegación inferior ===== */
+    nav {
+      background-color: var(--nav-bg);
+      border-top: 1px solid var(--nav-border);
+      display: flex;
+      justify-content: space-around;
+      padding: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      border-top: 2px solid transparent;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 2px 7px;
+      width: 16.5%;
+      touch-action: manipulation;
+    }
+
+    .nav-item.active {
+      color: var(--accent);
+      font-weight: 700;
+      border-top-color: var(--accent);
+    }
+
+    .nav-icon {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     @media (max-width: 460px) {
@@ -642,7 +574,6 @@
 <body>
 
   <header>
-    <div class="app-icon">±</div>
     <h1>Herramientas de Cálculo Rápido</h1>
     <div class="header-actions">
       <button class="icon-btn" id="theme-btn" title="Cambiar tema" aria-label="Cambiar tema" onclick="toggleTheme()">
@@ -655,7 +586,7 @@
     <!-- TAB ESTÁNDAR / CIENTÍFICA -->
     <div id="tab-standard" class="tab-panel active">
       <div class="panel-title">
-        <div class="panel-icon-box"><svg viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/></svg></div> <span id="calc-title">Calculadora<span class="mode-word" id="calc-mode-word"> Estándar</span></span>
+        <span id="calc-title">Calculadora<span class="mode-word" id="calc-mode-word"> Estándar</span></span>
         <div class="mode-switch" role="group" aria-label="Modo de la calculadora">
           <button id="mode-std" class="active" onclick="setCalcMode('standard')">Estándar</button>
           <button id="mode-sci" onclick="setCalcMode('scientific')">Científica</button>
@@ -726,7 +657,7 @@
     <!-- TAB PORCENTAJE DEL VALOR -->
     <div id="tab-p1" class="tab-panel">
       <div class="panel-title">
-        <div class="panel-icon-box"><svg viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div> Porcentaje de un Valor
+        Porcentaje de un Valor
       </div>
       
       <div class="result-box-compact">
@@ -774,7 +705,7 @@
     <!-- TAB QUÉ PORCENTAJE ES -->
     <div id="tab-p2" class="tab-panel">
       <div class="panel-title">
-        <div class="panel-icon-box"><svg viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div> ¿Qué porcentaje es?
+        ¿Qué porcentaje es?
       </div>
 
       <div class="result-box-compact">
@@ -821,7 +752,7 @@
     <!-- TAB AUMENTAR -->
     <div id="tab-p3" class="tab-panel">
       <div class="panel-title">
-        <div class="panel-icon-box"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div> Aumentar Porcentaje
+        Aumentar Porcentaje
       </div>
 
       <div class="result-box-compact">
@@ -869,7 +800,7 @@
     <!-- TAB DISMINUIR -->
     <div id="tab-p4" class="tab-panel">
       <div class="panel-title">
-        <div class="panel-icon-box"><svg viewBox="0 0 24 24"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></div> Disminuir Porcentaje
+        Disminuir Porcentaje
       </div>
 
       <div class="result-box-compact">
@@ -917,7 +848,7 @@
     <!-- TAB ESCALAS -->
     <div id="tab-scale" class="tab-panel">
       <div class="panel-title">
-        <div class="panel-icon-box"><svg viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg></div> Conversión de Escala
+        Conversión de Escala
       </div>
 
       <div class="result-box-compact">
