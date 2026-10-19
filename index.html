@@ -1042,9 +1042,32 @@
       if (activeInput) activeInput.classList.add('active-input');
     }
 
+    /* Separador de miles: en los cuadros de valores el punto es de miles y la coma es decimal */
+    function groupDigits(s) {
+      const i = s.indexOf(',');
+      const ip = i < 0 ? s : s.slice(0, i);
+      const rest = i < 0 ? '' : s.slice(i);
+      return ip.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + rest;
+    }
+
+    function numToField(n, maxDec = 8) {
+      if (!Number.isFinite(n)) return '';
+      let s = parseFloat(n.toFixed(maxDec)).toString();
+      if (/e/i.test(s)) s = n.toFixed(maxDec).replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
+      return groupDigits(s.replace('.', ','));
+    }
+
+    function fmtDisplay(v) {
+      if (/^-?\d+(\.\d*)?$/.test(v)) {
+        const i = v.indexOf('.');
+        return groupDigits(i < 0 ? v : v.slice(0, i)) + (i < 0 ? '' : ',' + v.slice(i + 1));
+      }
+      return v.replace('.', ',');
+    }
+
     function parseNum(valStr) {
       if (!valStr) return 0;
-      return parseFloat(valStr.replace(',', '.')) || 0;
+      return parseFloat(String(valStr).replace(/\./g, '').replace(',', '.')) || 0;
     }
 
     function vKey(val) {
@@ -1056,25 +1079,21 @@
       }
       if (!activeInput) return;
 
-      let v = activeInput.value;
+      let raw = activeInput.value.replace(/\./g, '');
       if (val === 'back') {
-        v = v.slice(0, -1);
+        raw = raw.slice(0, -1);
       } else if (val === '.' || val === ',') {
-        const sep = val;
-        if (!v.includes('.') && !v.includes(',')) {
-          v += (v === '' ? '0' + sep : sep);
-        }
-      } else {
-        if (v === '0') v = val;
-        else v += val;
+        if (!raw.includes(',')) raw += (raw === '' ? '0,' : ',');
+      } else if (/^\d$/.test(val)) {
+        raw = (raw === '0') ? val : raw + val;
       }
-      activeInput.value = v;
+      activeInput.value = groupDigits(raw);
       activeInput.dispatchEvent(new Event('input'));
     }
 
     function formatEs(num, maxDec = 2) {
       if (isNaN(num) || num === null) return '0';
-      return num.toLocaleString('es-AR', { maximumFractionDigits: maxDec });
+      return groupDigits(num.toLocaleString('es-AR', { maximumFractionDigits: maxDec, useGrouping: false }));
     }
 
     function cleanNum(n, digits = 12) {
@@ -1160,7 +1179,7 @@
     }
 
     function updateCalcDisplay() {
-      document.getElementById('calc-display').innerText = calcVal.replace('.', ',');
+      document.getElementById('calc-display').innerText = fmtDisplay(calcVal);
       fitDisplay();
     }
 
@@ -1492,7 +1511,7 @@
         const realMeters = realVal * fReal;
         const planMeters = realMeters / ratio;
         const planVal = planMeters / fPlan;
-        planInput.value = roundNum(planVal);
+        planInput.value = numToField(planVal);
         document.getElementById('scale-result-text').innerText = `Escala = ${formatEs(planVal, 4)} ${UNIT_ABBR[uPlan]}`;
         document.getElementById('scale-log').innerHTML = `• ${r1}:${r2} | Real: ${formatEs(realVal, 4)} ${UNIT_ABBR[uReal]}`;
       } else {
@@ -1506,7 +1525,7 @@
         const planMeters = planVal * fPlan;
         const realMeters = planMeters * ratio;
         const realVal = realMeters / fReal;
-        realInput.value = roundNum(realVal);
+        realInput.value = numToField(realVal);
         document.getElementById('scale-result-text').innerText = `Escala = ${formatEs(planVal, 4)} ${UNIT_ABBR[uPlan]}`;
         document.getElementById('scale-log').innerHTML = `• ${r1}:${r2} | Real: ${formatEs(realVal, 4)} ${UNIT_ABBR[uReal]}`;
       }
